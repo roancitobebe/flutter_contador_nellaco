@@ -9,13 +9,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  @override
 
   int valor = 0 ;
   int autoClickers = 0;
   Timer? relojito;
+  int reinicio = 0 ;
+  int clicsTotales = 0 ;
   
-  @override
+  
   void initState() {
     super.initState();
     relojito = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -25,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  @override
+ 
   void dispose() {
     relojito?.cancel(); 
     super.dispose();
@@ -41,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
     IconButton(
             icon: const Icon(Icons.info_outline), // El iconito de información
             onPressed: () {
-              Navigator.pushNamed(context, '/info');}) 
+              Navigator.pushNamed(context, '/info' ,arguments: clicsTotales);}) 
   ],
 ), 
 body: Center(
@@ -51,8 +52,10 @@ body: Center(
     TextButton(
       onPressed: () {
         setState(() {
-        valor++;});},
-    child: const Text("gosalo (toca aqui)", style: TextStyle(fontSize: 20)),
+        valor++;
+        clicsTotales++ ;
+        });},
+    child: const Text("gosalo toca aqui", style: TextStyle(fontSize: 20)),
     ),
     Text('$valor', style: const TextStyle(fontSize: 40)),
     Text('Auto-clickers: $autoClickers', style: const TextStyle(fontSize: 16, color: Colors.grey)),
@@ -60,35 +63,55 @@ body: Center(
  ),
 ),
 
-floatingActionButton: Row(
-  mainAxisAlignment: MainAxisAlignment.spaceEvenly ,
+bottomNavigationBar: SafeArea(
+child: Padding(
+padding: const EdgeInsets.only(bottom: 20.0, top: 10.0),
+child: Row(
+  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
   children : [
-    // boton restar
-    FloatingActionButton(
-      heroTag: 'btnMenos',
-      onPressed: () {
-        if (autoClickers > 0){
-        setState(() {
+    Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Text("VENDER" , style: TextStyle(fontWeight: FontWeight.bold ),),
+          // boton restar
+        FloatingActionButton(
+          heroTag: 'btnMenos',
+          onPressed: () {
+          if (autoClickers > 0){
+          setState(() {
           autoClickers--;
         });
         }
       }, 
       child: const Icon(Icons.remove),
     ),
+      ], ),
     
     // boton reset
+    Column(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+    const Text("RESET" , style: TextStyle(fontWeight: FontWeight.bold ),),
     FloatingActionButton(
       heroTag: 'btnReset',
       onPressed: () {
-        setState(() {
-        valor = 0 ;
-      autoClickers = 0;
-      });}, 
+        if (valor >= 100) 
+          setState(() {
+          valor = 0 ;
+          autoClickers = 0;
+      });
+      } ,
       child: const Icon(Icons.refresh),
+    ),
+    ],
     ),
 
     // boton sumat
+    Column(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+    const Text("COMPRAR" , style: TextStyle(fontWeight: FontWeight.bold ),),
     FloatingActionButton(
       heroTag: 'btnMas' ,
       onPressed: () {
@@ -96,12 +119,18 @@ floatingActionButton: Row(
         setState(() {
         valor -= 10 ;
         autoClickers++ ;
+
         {}
-      });}, 
+      });
+      }, 
       child: const Icon(Icons.add),
     ),
-]
+  ],
+  ) ,
+],
 ),
-) ;
+),
+ ),
+); 
 }
 }
