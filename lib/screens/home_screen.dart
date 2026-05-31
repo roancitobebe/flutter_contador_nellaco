@@ -34,19 +34,27 @@ floatingActionButton: Row(
   children : [
     // boton restar
     FloatingActionButton(
-      onPressed: () {}, 
+      onPressed: () {valor--; setState(() {
+        {};
+      });}, 
       child: const Icon(Icons.remove),
     ),
     
     // boton reset
     FloatingActionButton(
-      onPressed: () {}, 
+      onPressed: () {valor = 0 ;
+      setState(() {
+        
+      });}, 
       child: const Icon(Icons.refresh),
     ),
 
     // boton sumat
     FloatingActionButton(
-      onPressed: () {}, 
+      onPressed: () {valor ++;
+      setState(() {
+        {}
+      });}, 
       child: const Icon(Icons.add),
     ),
 ]
