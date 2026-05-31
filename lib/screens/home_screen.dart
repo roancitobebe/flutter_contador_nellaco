@@ -16,15 +16,42 @@ class _HomeScreenState extends State<HomeScreen> {
      AppBar(
   title: 
   Text("BELLAQUIANDO"),
-  centerTitle: true,
+  centerTitle: true,// titulo centrado
 ), 
 body: Center(
   child:
    Column(mainAxisAlignment: MainAxisAlignment.center,
    children: [
-    const Text("gosalo"),
-    Text('$valor', style: const TextStyle(fontSize: 40)),]
-) ,)) ;
+    const Text("gosalo"), //texto en medio 
+    Text('$valor', style: const TextStyle(fontSize: 40)),// valor mostrado en el centro
+    ],
+ ),
+),
+
+floatingActionButton: Row(
+  mainAxisAlignment: MainAxisAlignment.spaceEvenly ,
+
+  children : [
+    // boton restar
+    FloatingActionButton(
+      onPressed: () {}, 
+      child: const Icon(Icons.remove),
+    ),
+    
+    // boton reset
+    FloatingActionButton(
+      onPressed: () {}, 
+      child: const Icon(Icons.refresh),
+    ),
+
+    // boton sumat
+    FloatingActionButton(
+      onPressed: () {}, 
+      child: const Icon(Icons.add),
+    ),
+]
+),
+) ;
 
   }
 }
