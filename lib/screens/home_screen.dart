@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,6 +12,25 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
 
   int valor = 0 ;
+  int autoClickers = 0;
+  Timer? relojito;
+  
+  @override
+  void initState() {
+    super.initState();
+    relojito = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (autoClickers > 0) { 
+        setState(() {
+          valor += autoClickers; });}
+    });
+  }
+
+  @override
+  void dispose() {
+    relojito?.cancel(); 
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     return  Scaffold(appBar:
      AppBar(
@@ -21,16 +41,21 @@ class _HomeScreenState extends State<HomeScreen> {
     IconButton(
             icon: const Icon(Icons.info_outline), // El iconito de información
             onPressed: () {
-              // ¡Esta es la magia del viaje!
-              Navigator.pushNamed(context, '/info');}, )
+              Navigator.pushNamed(context, '/info');}) 
   ],
 ), 
 body: Center(
   child:
    Column(mainAxisAlignment: MainAxisAlignment.center,
    children: [
-    const Text("gosalo"), //texto en medio 
-    Text('$valor', style: const TextStyle(fontSize: 40)),// valor mostrado en el centro
+    TextButton(
+      onPressed: () {
+        setState(() {
+        valor++;});},
+    child: const Text("gosalo (toca aqui)", style: TextStyle(fontSize: 20)),
+    ),
+    Text('$valor', style: const TextStyle(fontSize: 40)),
+    Text('Auto-clickers: $autoClickers', style: const TextStyle(fontSize: 16, color: Colors.grey)),
     ],
  ),
 ),
@@ -41,25 +66,36 @@ floatingActionButton: Row(
   children : [
     // boton restar
     FloatingActionButton(
-      onPressed: () {valor--; setState(() {
-        {};
-      });}, 
+      heroTag: 'btnMenos',
+      onPressed: () {
+        if (autoClickers > 0){
+        setState(() {
+          autoClickers--;
+        });
+        }
+      }, 
       child: const Icon(Icons.remove),
     ),
     
     // boton reset
     FloatingActionButton(
-      onPressed: () {valor = 0 ;
-      setState(() {
-        
+      heroTag: 'btnReset',
+      onPressed: () {
+        setState(() {
+        valor = 0 ;
+      autoClickers = 0;
       });}, 
       child: const Icon(Icons.refresh),
     ),
 
     // boton sumat
     FloatingActionButton(
-      onPressed: () {valor ++;
-      setState(() {
+      heroTag: 'btnMas' ,
+      onPressed: () {
+      if (valor >= 10)
+        setState(() {
+        valor -= 10 ;
+        autoClickers++ ;
         {}
       });}, 
       child: const Icon(Icons.add),
@@ -67,6 +103,5 @@ floatingActionButton: Row(
 ]
 ),
 ) ;
-
-  }
+}
 }
