@@ -16,7 +16,14 @@ class _HomeScreenState extends State<HomeScreen> {
      AppBar(
   title: 
   Text("BELLAQUIANDO"),
-  centerTitle: true,// titulo centrado
+  centerTitle: true,                 // titulo centrado
+  actions: [
+    IconButton(
+            icon: const Icon(Icons.info_outline), // El iconito de información
+            onPressed: () {
+              // ¡Esta es la magia del viaje!
+              Navigator.pushNamed(context, '/info');}, )
+  ],
 ), 
 body: Center(
   child:
