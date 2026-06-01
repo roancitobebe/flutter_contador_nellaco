@@ -1,17 +1,11 @@
-# flutter_contador_nellaco
+Piru Touch
 
-A new Flutter project.
+Piru Touch sale de la idea mientras programaba lo basico del proyecto. Digo, esto puede ser como los juegos simples de clicker ya que es demasiado parecido, y poco a poco fui construyendo esta idea que me motivo.
 
-## Getting Started
+Demo
 
-This project is a starting point for a Flutter application.
+Este mini juego es muy basico debido a que, bueno, me falta destreza, pero es muy simple.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+El boton de mas compra un autoclicker que va generando pasivamente puntos.
+El boton de reset es un prestigio, el cual solo se puede hacer si tienes 100 puntos.
+El boton de menos solo quita autoclickers. Tenemos un mini boton arriba a la derecha donde sale la informacion mia como desarrollador, un poco echando vaina, y dos mejoras que me parecio chevere agregar para ponerle mas versatilidad al juego y que no quedara tan simple.
